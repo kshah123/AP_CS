@@ -38,7 +38,12 @@ public class SumAr {
                 t++;
             }
             sums[t] += nums.get(i);
-        }   
+        }
+        double sig = 0.0;
+        for(int i = 0; i < 5; i++)
+            sig += sums[i];
+        double avg = sig/5.0;
+        System.out.println(avg);
         
     }    
 }
