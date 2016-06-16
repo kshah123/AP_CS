@@ -30,7 +30,9 @@ public class Grades {
         }
         for(int i = 0; i < students.size(); i++){
             String[] c = in.get(i).split(",");
-            
+            double[] d = new double[c.length];
+            for(int t = 0; t < c.length; t++)
+                d[t] = Double.parseDouble(c[t]);
         }
     }
     
