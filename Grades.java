@@ -36,13 +36,12 @@ public class Grades {
             grades.students.get(i).setAvg();
         }
         bubbleSort(grades.students);
+        for(int i = 0; i < grades.students.size(); i++)
+            System.out.println(grades.students.get(i).getName() + ": ");
     }
-    public static void bubbleSort(ArrayList<Student> ar) {
-               
-               
+    public static void bubbleSort(ArrayList<Student> ar) {     
         int n = ar.size();
-        Student temp;
-               
+        Student temp;      
         for(int i=0; i < n; i++){
             for(int j=1; j < (n-i); j++){
                 if(ar.get(j-1).getAvg() > ar.get(j).getAvg()){
