@@ -28,4 +28,10 @@ public class Student {
     public double getAvg(){
         return avg;
     }
+    public String getName(){
+        return name;
+    }
+    public ArrayList<Double> getGrades(){
+        return grades;
+    }
 }
