@@ -13,8 +13,10 @@ public class TicTacToe {
     public static void main(String[] args) {
         // TODO code application logic here
         TicTacToe t = new TicTacToe();
-        char yn;
+        char yn = 'n';
         do{
+            if(yn == 'y')
+              System.out.println("Game board resetting...");      
             t.run();
             System.out.println("Do you want to play again (y or n)?");
             yn = t.console.next().charAt(0);
@@ -33,7 +35,7 @@ public class TicTacToe {
         print(currentBoard);
         for(int i = 0; i < 5; i++){
             //first person
-            String x = Xturn(defaultBoard);
+            String x = Xturn(currentBoard);
             String d = defaultBoard.replace(x, "x");
             defaultBoard = setEqual(d);
             currentBoard = setEqual(defaultBoard);
@@ -45,15 +47,15 @@ public class TicTacToe {
                 break;
             }
             if (i != 5){
-                String o = Oturn(defaultBoard);
+                String o = Oturn(currentBoard);
                 String f = defaultBoard.replace(o, "o");
                 defaultBoard = setEqual(f);
                 currentBoard = setEqual(defaultBoard);
                 currentBoard = replaceNum(currentBoard);
                 print(currentBoard);
             }
-            boolean w2 = checkWin(currentBoard);
-            if(w1 == true){
+            boolean w2 = checkWinO(currentBoard);
+            if(w2 == true){
                 System.out.println("Os wins!");
                 break;
             }
@@ -90,11 +92,8 @@ public class TicTacToe {
     	String pos;
         int p;
         do{
-        System.out.println("What row would you like to place an X in(1-3)?");
-    	String r = console.next();
-    	System.out.println("What column would you like to place an X in(1-3)?");
-    	String c = console.next();
-    	pos = r + "/" + c;
+        System.out.println("What row and column would you like to place an X in(r/c)?");
+    	pos = console.next();
         p = getPos(pos);
         if(a.charAt(p) == 'x' || a.charAt(p) == 'o')
             System.out.println("That is an invalid move");
@@ -105,11 +104,8 @@ public class TicTacToe {
     	String pos;
         int p;
         do{
-        System.out.println("What row would you like to place an O in(1-3)?");
-    	String r = console.next();
-    	System.out.println("What column would you like to place an O in(1-3)?");
-    	String c = console.next();
-    	pos = r + "/" + c;
+        System.out.println("What row and column would you like to place an O in(r/c)?");
+    	pos = console.next();
         p = getPos(pos);
         if(a.charAt(p) == 'x' || a.charAt(p) == 'o')
             System.out.println("That is an invalid move");
@@ -119,28 +115,56 @@ public class TicTacToe {
     public boolean checkWin(String a){
         boolean win = false;
         //top row across
-        if((a.charAt(0) == 'x' && a.charAt(2) == 'x' && a.charAt(4) == 'x') || (a.charAt(0) == 'o' && a.charAt(2) == 'o' && a.charAt(4) == 'o'))
+        if((a.charAt(0) == 'x' && a.charAt(2) == 'x' && a.charAt(4) == 'x') )
             win = true;
         //middle row across
-        else if((a.charAt(10) == 'x' && a.charAt(12) == 'x' && a.charAt(14) == 'x') || (a.charAt(10) == 'o' && a.charAt(12) == 'o' && a.charAt(14) == 'o'))
+        else if((a.charAt(10) == 'x' && a.charAt(12) == 'x' && a.charAt(14) == 'x'))
             win = true;
         //bottom row across
-        else if((a.charAt(20) == 'x' && a.charAt(22) == 'x' && a.charAt(24) == 'x') || (a.charAt(20) == 'o' && a.charAt(22) == 'o' && a.charAt(24) == 'o'))
+        else if((a.charAt(20) == 'x' && a.charAt(22) == 'x' && a.charAt(24) == 'x'))
             win = true;
         //first column down
-        else if((a.charAt(0) == 'x' && a.charAt(10) == 'x' && a.charAt(20) == 'x') || (a.charAt(0) == 'o' && a.charAt(10) == 'o' && a.charAt(20) == 'o'))
+        else if((a.charAt(0) == 'x' && a.charAt(10) == 'x' && a.charAt(20) == 'x'))
             win = true;
         //second column down
-        else if((a.charAt(2) == 'x' && a.charAt(12) == 'x' && a.charAt(22) == 'x') || (a.charAt(2) == 'o' && a.charAt(12) == 'o' && a.charAt(22) == 'o'))
+        else if((a.charAt(2) == 'x' && a.charAt(12) == 'x' && a.charAt(22) == 'x'))
             win = true;
         //third column down
-        else if((a.charAt(4) == 'x' && a.charAt(14) == 'x' && a.charAt(24) == 'x') || (a.charAt(4) == 'o' && a.charAt(14) == 'o' && a.charAt(24) == 'o'))
+        else if((a.charAt(4) == 'x' && a.charAt(14) == 'x' && a.charAt(24) == 'x'))
             win = true;
         //diagonal left to right
-        else if((a.charAt(0) == 'x' && a.charAt(12) == 'x' && a.charAt(24) == 'x') || (a.charAt(0) == 'o' && a.charAt(12) == 'o' && a.charAt(24) == 'o'))
+        else if((a.charAt(0) == 'x' && a.charAt(12) == 'x' && a.charAt(24) == 'x'))
             win = true;
         //diagonal right to left
-        else if((a.charAt(4) == 'x' && a.charAt(12) == 'x' && a.charAt(20) == 'x') || (a.charAt(4) == 'o' && a.charAt(12) == 'o' && a.charAt(20) == 'o'))
+        else if((a.charAt(4) == 'x' && a.charAt(12) == 'x' && a.charAt(20) == 'x'))
+            win = true;
+        return win;
+    }
+    public boolean checkWinO(String a){
+        boolean win = false;
+        //top row across
+        if((a.charAt(0) == 'o' && a.charAt(2) == 'o' && a.charAt(4) == 'o') )
+            win = true;
+        //middle row across
+        else if((a.charAt(10) == 'o' && a.charAt(12) == 'o' && a.charAt(14) == 'o'))
+            win = true;
+        //bottom row across
+        else if((a.charAt(20) == 'o' && a.charAt(22) == 'o' && a.charAt(24) == 'o'))
+            win = true;
+        //first column down
+        else if((a.charAt(0) == 'o' && a.charAt(10) == 'o' && a.charAt(20) == 'o'))
+            win = true;
+        //second column down
+        else if((a.charAt(2) == 'o' && a.charAt(12) == 'o' && a.charAt(22) == 'o'))
+            win = true;
+        //third column down
+        else if((a.charAt(4) == 'o' && a.charAt(14) == 'o' && a.charAt(24) == 'o'))
+            win = true;
+        //diagonal left to right
+        else if((a.charAt(0) == 'o' && a.charAt(12) == 'o' && a.charAt(24) == 'o'))
+            win = true;
+        //diagonal right to left
+        else if((a.charAt(4) == 'o' && a.charAt(12) == 'o' && a.charAt(20) == 'o'))
             win = true;
         return win;
     }
