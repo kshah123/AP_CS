@@ -10,16 +10,19 @@ package sortmain;
  * @author Kush Shah
  */
 public class sortAll {
-    public Comparable[] sort(Comparable[] x){
-       for (int i = 0; i < x.length; i++) {
-        for (int j = 0; j < i; j++) {
-            if (x[j + 1].compareTo(x[j]) < 0) {
-                Comparable temp = x[j + 1];
-                x[j + 1] = x[j];
-                x[j] = temp;
+    public static Comparable[] sort(Comparable[] x){
+        Comparable[] y = new Comparable[x.length];
+        for(int i = 0; i < x.length; i++)
+            y[i] = x[i];
+        for (int i = 0; i < y.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (y[j + 1].compareTo(y[j]) < 0) {
+                    Comparable temp = y[j + 1];
+                    y[j + 1] = y[j];
+                    y[j] = temp;
                 }
             }
         }
-       return x;
+       return y;
     }
 }
