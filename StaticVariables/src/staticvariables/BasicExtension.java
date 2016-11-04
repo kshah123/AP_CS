@@ -5,10 +5,7 @@
  */
 package staticvariables;
 
-/**
- *
- * @author anshulkamath
- */
+
 public class BasicExtension extends Basic
 {
     private int people;
