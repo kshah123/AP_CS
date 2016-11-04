@@ -5,10 +5,6 @@
  */
 package staticvariables;
 
-/**
- *
- * @author anshulkamath
- */
 public class StaticVariables
 {
     
